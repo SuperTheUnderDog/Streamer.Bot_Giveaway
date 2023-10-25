@@ -23,8 +23,8 @@ To set up this extension, follow these steps:
 2) Download the contents of [WheelSpinner](WheelSpinner)
    - Check the [spinner.js](WheelSpinner/spinner.js) to make sure the `WEBSOCKET_URI` and `ACTION_ID` match your Streamer.Bot setup (they are set to the current defaults).
    - There are a few other settings in the same script you can play around with to configure your wheel. You can also leave them as default.
-3) Download the <a href="/giveaway/Example settings files">example settings files</a>.
-   - Use <a href="/giveaway/Example settings files/exampleGiveawaySettingsFull.json">exampleGiveawaySettingsFull.json</a> and <a href="?readme=1#settings-file-properties">the Settings File Properties section</a> as a reference to configure your settings. Notice <a href="/giveaway/Example settings files/exampleSettingsOptions.json">exampleSettingsOptions.json</a> references settings files instead of setting them itself.
+3) Download the <a href="/Example settings files">example settings files</a>.
+   - Use <a href="/Example settings files/exampleGiveawaySettingsFull.json">exampleGiveawaySettingsFull.json</a> and <a href="?readme=1#settings-file-properties">the Settings File Properties section</a> as a reference to configure your settings. Notice <a href="/Example settings files/exampleSettingsOptions.json">exampleSettingsOptions.json</a> references settings files instead of setting them itself.
    - **IMPORTANT:** You must set a `configPath` or a `fixedEntries` array.
      - If you want to use a wheel, `configPath` is needed even if using `fixedEntries`. Only the wheel properties are needed then.
    - All properties should be strings, or arrays of strings (see example)
@@ -34,7 +34,7 @@ To set up this extension, follow these steps:
    - Make sure the file paths aren't surrounded by extra quotation marks
 5) Configure your config file(s), if you have any.
    - If you want to run actual giveaways, and not only roll pre-determined entries, you're going to need a config file.
-   - Check the <a href="?readme=1#config-file-properties">Config File Properties section</a> for more information. You can also use the <a href="/giveaway/Example config files">Example config files</a> for reference.
+   - Check the <a href="?readme=1#config-file-properties">Config File Properties section</a> for more information. You can also use the <a href="/Example config files">Example config files</a> for reference.
 6) (if using a wheel) Set the File Watcher trigger in the Info Sender action (under the Wheel Spinner group) so that it watches the folder/s set in your config file/s for the wheel files (specifically- so that it triggers when the values file and when the spin file change).
    - Make sure it's watching both the correct folder and the correct files
    - You can set the watcher either to the specific files, or use the * wildcard character. (For example: ending with a `*.*` will watch all files in the folder. `*.json` will watch all the json files in it.)
@@ -64,7 +64,7 @@ You can go into your stream and trigger a giveaway (by default, the command `!sg
 - When starting a giveaway, you can pass it arguments to overwrite properties set by defaults/a setting file:
   - Send an argument with the same name as the property you wish to overwrite. This cannot be achieved via Twitch chat, but can be set up to be tied to other actions, a Stream Deck button, etc.
   - `duration`, specifically, can be set through Twitch chat when calling the start giveaway command by sending it as a first argument. (For example: `!sga 30000` will start a giveaway with 30 seconds (30,000 milliseconds) on the timer)
-- If you have multiple settings file set using `%settingsChoicePath%` and a file with the structure of <a href="/giveaway/Example settings files/exampleSettingsOptions.json">exampleSettingsOptions.json</a>, you can choose which one to use by passing its index as a 2nd argument when calling the start giveaway command
+- If you have multiple settings file set using `%settingsChoicePath%` and a file with the structure of <a href="/Example settings files/exampleSettingsOptions.json">exampleSettingsOptions.json</a>, you can choose which one to use by passing its index as a 2nd argument when calling the start giveaway command
   - This will reset any overwritten properties. You can pass arguments in this same command to set them anew.
   - If you wish to use the default duration/the duration set in the file, pass something other than a number as the first argument. (For example: `!sga r 0` will use the first (index 0) settings file in the array with the duration set in it/by the defaults, where as `!sga 30000 0` will use that same settings file with a duration time of 30 seconds)
   - Will default to the first path in the array, if none is chosen and this is the first giveaway run since the bot has been started.
@@ -73,8 +73,8 @@ You can go into your stream and trigger a giveaway (by default, the command `!sg
 Property | Explanation | Default value | Notes
 ------- | ------- | ------- | -------
 configPath | Path to the config file | "" | 
-spinnerSiteAddress | Base url for the wheel. Link to your copy of [the matching index.html](WheelSpinner/index.html), or where it's hosted. | "" | I recommend opening the file in browser and copying from there, rather than trying to copy the path to the file.
-winnerSiteAddress | Base url for the winner. Link to your copy of <a href="WheelSpinner/Wheel Winner/index.html">the matching index.html</a>, or where it's hosted. | "" | I recommend opening the file in browser and copying from there, rather than trying to copy the path to the file.
+spinnerSiteAddress | Base url for the wheel. Link to your copy of [spinner.html](WheelSpinner/spinner.html), or where it's hosted. | "" | I recommend opening the file in browser and copying from there, rather than trying to copy the path to the file.
+winnerSiteAddress | Base url for the winner. Link to your copy of <a href="WheelSpinner/winner.html">winner.html</a>, or where it's hosted. | "" | I recommend opening the file in browser and copying from there, rather than trying to copy the path to the file.
 blankSiteAddress | Base url for a blank page. Link to your copy of [blank.html](WheelSpinner/blank.html), or where it's hosted. | "" | I recommend opening the file in browser and copying from there, rather than trying to copy the path to the file. This is used to prevent the last frame of a previous roll from showing before spinning the wheel.
 |||
 obsSpinnerScene | The name of the scene containing the Wheel Spinner browser source | "" | If left blank/ommitted, will use obsScene to populate this field
@@ -139,6 +139,7 @@ rewards || Array | The array of reward options | Define the rewards here. If onl
 
 ## Wheel js settings
 It's likely you don't need to change any of these.
+
 These settings are found inside the [spinner.js](WheelSpinner/spinner.js) file, right at the start of it.
 
 Property | Explanation | Default value | Notes

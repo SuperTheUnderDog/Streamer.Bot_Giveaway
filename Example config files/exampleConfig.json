@@ -1,0 +1,41 @@
+{
+	"resultsFile": "C:\\...\\giveaway Results.txt",
+	"wheelSettings": {
+		"folder": "C:/.../giveawayFiles",
+		"icon": "logo.png",
+		"values": "participants.json",
+		"spin": "callWheel.json",
+		"colorGradient": ["00F000", "ff00ff20"],
+		"colors": ["0050B0","","","333"]
+	},
+	"rewards": [
+		{
+			"reward": "Game",
+			"raffleType": "Exclusive",
+			"secret": true,
+			"ignore": true,
+			"raffleFile": "C:\\...\\games.txt"
+		}, {
+			"reward": "Fireball",
+			"secret": false,
+			"raffleType": "Limited",
+			"maximumAmount": 8
+		}, {
+			"reward": "Free Spin",
+			"ignore": false,
+			"secret": false,
+			"rewardType": "Limitless"
+		}, {
+			"reward": "Orb",
+			"ignore": false,
+			"raffleType": "Repeated",
+			"raffleFile": "C:\\...\\orbs.txt"
+		}, {
+			"reward": "Game",
+			"raffleType": "Game",
+			"secret": true,
+			"format": "GAME - CODE",
+			"raffleFile": "C:\\...\\gamesFormatted.txt"
+		}
+	]
+}

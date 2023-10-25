@@ -1,0 +1,28 @@
+
+.winner {
+    margin: auto;
+}
+div.winner {
+    align-items: center;
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+p.winner {
+    font-size: clamp(10vw, clamp(10vh, 150px, 50vh), 20vw);
+    font-family: "Modak", cursive;
+    color: transparent;
+    background-image: repeating-linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet, red 100%,orange, yellow, green, blue, indigo, violet, red 200%); /* */
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: 400% 400%;
+    width: 100%;
+    text-align: center;
+    animation: animateBG 5000ms linear infinite;
+}
+
+@keyframes animateBG {
+    0% {background-position-x: 0%;}
+    100% {background-position-x: 135%;}
+}

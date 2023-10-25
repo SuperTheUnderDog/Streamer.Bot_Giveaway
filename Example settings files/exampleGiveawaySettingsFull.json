@@ -1,0 +1,36 @@
+{
+	"configPath": "C:\\...\\giveawayConfig.json",
+	"spinnerSiteAddress": "file:///C:/.../WheelSpinner/spinner.html",
+	"winnerSiteAddress": "file:///C:/.../WheelSpinner/winner.html",
+	"blankSiteAddress": "file:///C:/.../WheelSpinner/blank.html",
+	
+	"obsScene": "",
+	"obsSpinnerScene": "Wheel Spinner - Wheel",
+	"obsSpinnerSource": "Wheel Spinner",
+	"obsWinnerScene": "Wheel Spinner - Winner",
+	"obsWinnerSource": "Wheel Winner",
+	
+	"duration": "300000",
+	"useWheel": "True",
+	"removeWinnerFromPool": "true",
+	"whisper": "false",
+	"msgType": "input0",
+	"sendWhisperFromBot": "False",
+	"sendPublicFromBot": "True",
+	
+	"announceColor": "purple",
+	"doGiveawayAnnouncements": "true",
+	
+	"announceThresholds": "[120000, 90000]",
+	"announceEvery": "300000",
+	"lastAnnounceThreshold": "60000",
+	"respondType": "EveryTimeAmount",
+	"respondTimeAmount": "90000",
+	"respondUserAmount": "10",
+	"respondDelay": "30000",
+	
+	"timeButton": "buttonID",
+	"wheelDelay": "1",
+	
+	"fixedEntries": "[an entry, another entry, MORE ENTRIES, AAAAAAAAAAAAAA]"
+}

@@ -1,0 +1,115 @@
+
+/*Variables*/
+body {
+    --rotation: 30;
+    --inset: 20;
+    --left-side: 1;
+    --slice-width: 250;
+    --arrow-size: 40;
+    --start-spin-at: 0;
+    --end-spin-at: 0;
+    --prize-count: 1;
+}
+
+div.spinner {
+    display: grid;
+    margin: auto;
+    align-items: center;
+    height: calc(var(--slice-width)*2px + var(--inset)*2px);
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    font-family: "Custom Font", "Concert One", "Kalam", "Abril Fatface", "Luckiest Guy", "Titan One", "DM Serif Display", "Kanit", "Lilita One", "Caveat", "Press Start 2P", 'Times New Roman', Times, serif;
+    padding: calc(25vh - var(--slice-width)*0.5px);
+}
+
+.spinner > * {
+    grid-area: spinner;
+    z-index: 1;
+}
+
+.spinner > ul > li {
+    transform: rotate(calc(var(--rotation)*1deg));
+    transform-origin: center left;
+    padding: 0 calc(var(--inset)*1px) 0 calc(var(--inset)*1px);
+    text-indent: calc(var(--inset)*1px);
+    position: relative;
+    grid-area: spinner;
+    list-style-type: none;
+    width: calc(var(--slice-width)*1px);
+    height: fit-content;
+    overflow: hidden;
+    font-size: min(calc(var(--slice-width) / var(--prize-count)*2.5px),calc(var(--slice-width) * 1px / 10));
+}
+
+.spinner > ul > li.left {
+    transform-origin: center right;
+    transform: rotate(calc(var(--rotation)*-1deg));
+    text-align: left;
+    direction:ltr;
+    right: calc(((var(--slice-width) * 1px) + (var(--inset) * 2px)) / 2);
+}
+
+.spinner > ul > li.right {
+    transform-origin: center left;
+    transform: rotate(calc(var(--rotation)*1deg));
+    text-align: right;
+    direction:rtl;
+    left: calc(((var(--slice-width) * 1px) + (var(--inset) * 2px)) / 2);
+}
+
+.spinner > ul {
+    display: grid;
+    height: calc(var(--slice-width)*2px + var(--inset)*2px);
+    width: calc(var(--slice-width)*2px + var(--inset)*2px);
+    border-radius: 50%;
+    padding: 0;
+    box-shadow: 0 0 0 calc(var(--inset)*3px/5) #00000017 inset;
+}
+
+#wheel {
+    z-index: 0;
+    animation-fill-mode: forwards;
+}
+
+.spinner > span::after {
+    content: "➤"; /*➤ ►   ➢➣*/
+}
+.spinner.right > span {
+    transform: rotate(180deg);
+    left: calc(var(--arrow-size)*1px - var(--inset)*3px/4);
+}
+.spinner.left > span {
+    right: calc(var(--arrow-size)*1px - var(--inset)*3px/4);
+}
+.spinner > span {
+    width: fit-content;
+    position: relative;
+    font-size: calc(var(--arrow-size)*1px);
+}
+.spinner.right {
+    direction: rtl;
+}
+.spinner.left {
+    direction: ltr;
+}
+
+/*image in the middle*/
+#midPic {
+    border-radius: 50%;
+    height: calc(var(--slice-width)*1px/2);
+    width: calc(var(--slice-width)*1px/2);
+}
+figure {
+    height: fit-content;
+    width: fit-content;
+    justify-self: center;
+}
+
+@keyframes animateSpin {
+    from {transform: rotate(calc(var(--start-spin-at)*1deg));}
+    to {transform: rotate(calc(var(--end-spin-at)*1deg));}
+}

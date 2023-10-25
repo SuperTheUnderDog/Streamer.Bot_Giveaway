@@ -1,0 +1,9 @@
+{
+	"defaultSettings": "C:\\...\\exampleDefaultSettings.json",
+	"settings": [
+		"C:\\...\\giveawaySettings.json",
+		"C:\\...\\exampleGiveawaySettings.json",
+		"C:\\...\\exampleGiveawaySettingsFull.json",
+		"C:\\...\\exampleFixed.json"
+	]
+}

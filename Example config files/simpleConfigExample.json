@@ -1,0 +1,19 @@
+{
+	"resultsFile": "C:\\...\\giveaway Results.txt",
+	"wheelSettings": {
+		"folder": "C:/.../giveaway",
+		"icon": "./logo.png",
+		"oldValues": "participants.json",
+		"values": "participants_new.json",
+		"spin": "callWheel.json",
+		"colors": ["#4287f5","#a745ed","#d955b3","#db5644", "#d49b33", "#8fb81f", "#3bd445", "#3bd49e","#49bce6"]
+	},
+	"rewards": [
+    {
+			"reward": "Game",
+			"raffleType": "Game",
+			"secret": true,
+			"raffleFile": "C:\\...\\gamesFormatted.txt"
+		}
+	]
+}

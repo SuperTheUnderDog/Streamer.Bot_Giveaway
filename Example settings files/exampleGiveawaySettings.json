@@ -1,0 +1,9 @@
+{
+	"useWheel": "True",
+	
+	"duration": "25000",
+	"respondType": "None",
+	"removeWinnerFromPool": "False",
+	"whisper": "False",
+	"msgType": "input0"
+}

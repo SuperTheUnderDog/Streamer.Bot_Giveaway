@@ -1,6 +1,6 @@
 # Giveaways with Streamer.Bot
 This extension adds giveaway functionality to your [Streamer.bot](https://streamer.bot/) setup.
-Version: 1.2.3
+Version: 1.2.4
 
 Written for Streamer.Bot version 0.2.1
 

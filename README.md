@@ -20,11 +20,11 @@ To set up this extension, follow these steps:
    - You will need to set a settings file inside the Setup Picker action. (see step 4)
    - You will need to set the File Watcher trigger in the Info Sender action. (see step 6)
    - Remember to enable the commands and configure them to your liking.
-2) Download the contents of [WheelSpinner](WheelSpinner)
-   - Check the [spinner.js](WheelSpinner/spinner.js) to make sure the `WEBSOCKET_URI` and `ACTION_ID` match your Streamer.Bot setup (they are set to the current defaults).
+2) Download the contents of [WheelSpinner](WheelSpinnerFromScratch)
+   - Check the [spinner.js](WheelSpinnerFromScratch/spinner.js) to make sure the `WEBSOCKET_URI` and `ACTION_ID` match your Streamer.Bot setup (they are set to the current defaults).
    - There are a few other settings in the same script you can play around with to configure your wheel. You can also leave them as default.
-3) Download the <a href="/Example settings files">example settings files</a>.
-   - Use <a href="/Example settings files/exampleGiveawaySettingsFull.json">exampleGiveawaySettingsFull.json</a> and <a href="?readme=1#settings-file-properties">the Settings File Properties section</a> as a reference to configure your settings. Notice <a href="/Example settings files/exampleSettingsOptions.json">exampleSettingsOptions.json</a> references settings files instead of setting them itself.
+3) Download the <a href="/giveaway/Example settings files">example settings files</a>.
+   - Use <a href="/giveaway/Example settings files/exampleGiveawaySettingsFull.json">exampleGiveawaySettingsFull.json</a> and <a href="?readme=1#settings-file-properties">the Settings File Properties section</a> as a reference to configure your settings. Notice <a href="/giveaway/Example settings files/exampleSettingsOptions.json">exampleSettingsOptions.json</a> references settings files instead of setting them itself.
    - **IMPORTANT:** You must set a `configPath` or a `fixedEntries` array.
      - If you want to use a wheel, `configPath` is needed even if using `fixedEntries`. Only the wheel properties are needed then.
    - All properties should be strings, or arrays of strings (see example)
@@ -34,10 +34,12 @@ To set up this extension, follow these steps:
    - Make sure the file paths aren't surrounded by extra quotation marks
 5) Configure your config file(s), if you have any.
    - If you want to run actual giveaways, and not only roll pre-determined entries, you're going to need a config file.
-   - Check the <a href="?readme=1#config-file-properties">Config File Properties section</a> for more information. You can also use the <a href="/Example config files">Example config files</a> for reference.
+   - Check the <a href="?readme=1#config-file-properties">Config File Properties section</a> for more information. You can also use the <a href="/giveaway/Example config files">Example config files</a> for reference.
 6) (if using a wheel) Set the File Watcher trigger in the Info Sender action (under the Wheel Spinner group) so that it watches the folder/s set in your config file/s for the wheel files (specifically- so that it triggers when the values file and when the spin file change).
    - Make sure it's watching both the correct folder and the correct files
    - You can set the watcher either to the specific files, or use the * wildcard character. (For example: ending with a `*.*` will watch all files in the folder. `*.json` will watch all the json files in it.)
+
+*By default, the `Display Time on deck` action is disabled. If you have a Stream Deck and would like to display the remaining time for the giveaway on one of its buttons, make sure to enable it and set the button's ID in your settings file.
 ### Setting up OBS
 If using a wheel, you'll need to set up OBS so it can be displayed.
 You'll need 2 browser sources (which you'll be refrencing in your settings file- see step 3 above). 1 source will be used to display the wheel, and 1 to display the winner.
@@ -51,21 +53,29 @@ Winner source:
 - `Local file` (top of properties) should remain unchecked/disabled.
 - `Shutdown source when not visible` and `Refresh browser when scene becomes active` (bottom of the properties) should be checked/active (otherwise the confetti might not work).
 
-And that's it! You're good to go!
+## And that's it! You're good to go!
 You can go into your stream and trigger a giveaway (by default, the command `!sga` or `!startgiveaway` will start a giveaway). See the following section for some options and details.
+
 *Make sure your Streamer.Bot websocket is started and, if using the wheel, OBS is connected
+
+### To summarize
+- You should have set up a config file, a settings file, and potentially a settings options file (recommended).
+- You've set the path of you settings/settings options file inside the `Setup Picker` action.
+- You've set the `File Watcher` triggers for the `Info Sender` action
+- You've set up your OBS sources (and made sure the bot and OBS are connected)
+- Your Streamer.Bot websocket is active
 
 # Settings
 ## Settings File Properties
 - Make sure you have either a configPath or a fixedEntries array set as a bare minimum.
 - The file's contents should be a valid json.
-- I recommend using a default settings file for properties such as the site addresses (`spinnerSiteAddress`, `winnerSiteAddress`, `blankSiteAddress`) and the OBS names (`obsSpinnerSource`, `obsWinnerSource`, `obsSpinnerScene` & `obsWinnerScene` or `obsScene`), as well as any other properties you have that don't often change.
+- I recommend using a default settings file<sup>(see <a href="#settings-options-file-properties">the options file section</a>)</sup> for properties such as the site addresses (`spinnerSiteAddress`, `winnerSiteAddress`, `blankSiteAddress`) and the OBS names (`obsSpinnerSource`, `obsWinnerSource`, `obsSpinnerScene` & `obsWinnerScene` or `obsScene`), as well as any other properties you have that don't often change.
 - Any property can be ommitted to use the default instead
 - When starting a giveaway, you can pass it arguments to overwrite properties set by defaults/a setting file:
   - Send an argument with the same name as the property you wish to overwrite. This cannot be achieved via Twitch chat, but can be set up to be tied to other actions, a Stream Deck button, etc.
   - `duration`, specifically, can be set through Twitch chat when calling the start giveaway command by sending it as a first argument. (For example: `!sga 30000` will start a giveaway with 30 seconds (30,000 milliseconds) on the timer)
-- If you have multiple settings file set using `%settingsChoicePath%` and a file with the structure of <a href="/Example settings files/exampleSettingsOptions.json">exampleSettingsOptions.json</a>, you can choose which one to use by passing its index as a 2nd argument when calling the start giveaway command
-  - This will reset any overwritten properties. You can pass arguments in this same command to set them anew.
+- If you have multiple settings file set using `%settingsChoicePath%` and a file with the structure of <a href="/giveaway/Example settings files/exampleSettingsOptions.json">exampleSettingsOptions.json</a>, you can choose which one to use by passing its index as a 2nd argument when calling the start giveaway command
+  - This will reset any overwritten properties. You can pass arguments when calling same command to set them anew.
   - If you wish to use the default duration/the duration set in the file, pass something other than a number as the first argument. (For example: `!sga r 0` will use the first (index 0) settings file in the array with the duration set in it/by the defaults, where as `!sga 30000 0` will use that same settings file with a duration time of 30 seconds)
   - Will default to the first path in the array, if none is chosen and this is the first giveaway run since the bot has been started.
 - Unless specifying which settings file to use as explained in the above point, settings do not reset between runs. This means you can simply start the next giveaway with no arguments to use the same parameters as your last ran giveaway.
@@ -73,8 +83,8 @@ You can go into your stream and trigger a giveaway (by default, the command `!sg
 Property | Explanation | Default value | Notes
 ------- | ------- | ------- | -------
 configPath | Path to the config file | "" | 
-spinnerSiteAddress | Base url for the wheel. Link to your copy of [spinner.html](WheelSpinner/spinner.html), or where it's hosted. | "" | I recommend opening the file in browser and copying from there, rather than trying to copy the path to the file.
-winnerSiteAddress | Base url for the winner. Link to your copy of <a href="WheelSpinner/winner.html">winner.html</a>, or where it's hosted. | "" | I recommend opening the file in browser and copying from there, rather than trying to copy the path to the file.
+spinnerSiteAddress | Base url for the wheel. Link to your copy of [the matching index.html](WheelSpinner/index.html), or where it's hosted. | "" | I recommend opening the file in browser and copying from there, rather than trying to copy the path to the file.
+winnerSiteAddress | Base url for the winner. Link to your copy of <a href="WheelSpinner/Wheel Winner/index.html">the matching index.html</a>, or where it's hosted. | "" | I recommend opening the file in browser and copying from there, rather than trying to copy the path to the file.
 blankSiteAddress | Base url for a blank page. Link to your copy of [blank.html](WheelSpinner/blank.html), or where it's hosted. | "" | I recommend opening the file in browser and copying from there, rather than trying to copy the path to the file. This is used to prevent the last frame of a previous roll from showing before spinning the wheel.
 |||
 obsSpinnerScene | The name of the scene containing the Wheel Spinner browser source | "" | If left blank/ommitted, will use obsScene to populate this field
@@ -106,6 +116,15 @@ timeButton | The ID of a button on your elgato Stream Deck to display the time r
 wheelDelay | In milliseconds. A delay to have between showing the wheel on screen and when it starts spinning | "1" |
 |||
 fixedEntries | The enrties to use instead of running a giveaway | "[]" | If this is set and not empty, will take precedence over running a giveaway. It works both with the wheel and invisibly. This option **SHOULD NOT** be set in a defaults settings file, but in specific files, as you may forget to overwrite it.
+
+## Settings Options file properties
+- Optional file (recommended). See step 4 of the [#setup](#setup)
+- see <a href="Example settings files/exampleSettingsOptions.json">exampleSettingsOptions.json</a> for reference
+
+Property | Explanation | Default value | Notes
+------- | ------- | ------- | -------
+defaultSettings | Path to the default settings file | "" | The settings defined in this file will be used for all your giveaways, unless the specific settings override it.
+settings | Array of paths to specific settings files | [] | **(Required)** By default, will use the first path listed. You can swap which settings file you use when starting a giveaway, by sending its index in this array (notice- the array is 0-indexed) as a 2nd argument <sup><a href="#settings-file-properties">(see Settings File Properties for examples)</a></sup>
 
 ## Config File Properties
 - The file's contents should be a valid json
@@ -139,8 +158,7 @@ rewards || Array | The array of reward options | Define the rewards here. If onl
 
 ## Wheel js settings
 It's likely you don't need to change any of these.
-
-These settings are found inside the [spinner.js](WheelSpinner/spinner.js) file, right at the start of it.
+These settings are found inside the [spinner.js](WheelSpinnerFromScratch/spinner.js) file, right at the start of it.
 
 Property | Explanation | Default value | Notes
 ------- | ------- | ------- | -------
@@ -152,9 +170,26 @@ repeatColors | Whether to repeat colours | true | Used when there are more slice
 durationRange | The time the wheel spins for | [3000, 6000] | Values are in milliseconds. Minimum first, maximum second. If you want a specific duration instead of a range, set both values to that number.
 fontCase | The case to use for the entries | {"lower": false, "upper": false, "original": true} | Set the one you want to `true` and the rest to `false`. lower/upper = entry text will be in lower/uppercase respectively. original keeps the original casing. Doesn't affect how the winner result will be displayed.
 
+# Commands
+These are the default commands of the extension.
+
+If you change how people can join your giveaway, make sure to reflect that in the Start Giveaway action (change the value `joinCommand` at the beginning of the last `Execute C#` subaction, or pass it as an argument of that name)
+
+Command Name | Trigger | Explanation | Aliases | Permissions | Notes
+------- | ------- | ------- | ------- | ------- | -------
+Cancel Giveaway | `!cancelgiveaway` | Cancels a running giveaway | `!cga` | Moderators | Make sure the Giveaway action queues are cleared before starting a new giveaway, or you may get double prints and unexpected behaviour.
+Check Giveaway Time Left | `!gtime` | Prints how long is left to join the giveaway | `!giveawaytime`, `!cgt`, `!checkGiveawayTime` | Anyone | 
+Join Giveaway | `!giveaway` | Joins the running giveaway | | Anyone | 
+Manual Giveaway Winner | `!pickWinner` | Allows picking a winner manually | `!pgw` | Moderators | Pass the winning user as a first argument when using this command (e.g. `!pgw @SuperTheUnderDog`).
+Reroll Giveaway Winner | `!rerollGiveaway` | Rerolls the giveaway | `!rga` | Moderators | Uses the same list of entrants from the last-run giveaway (minus the winner from last time, if the `removeWinnerFromPool` setting is true)
+Start Giveaway | `!startGiveaway` | Starts a giveaway | `!sga` | Moderators | Can accept a duration as its first argument, and a settings file index as its second argument.
+
+
 # Customization ideas & suggestions
 There are many ways you can customize the giveaways beyond the scope of a settings file!
-For example, you can add custom sounds to the wheel, to be played before, during, and after it spins!
+For example, you can:
+- Add custom sounds to the wheel, to be played before, during, and after it spins!
+- Make a custom winner action, to automatically trigger some effect
 
 # Thanks
 With thanks to [DKlarations](https://www.twitch.tv/dklarations) and his community over on Twitch for helping with testing and feature suggestions!

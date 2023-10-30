@@ -10,11 +10,11 @@
 	},
 	"rewards": [
 		{
-			"reward": "Game",
+			"reward": "Discount code",
 			"raffleType": "Exclusive",
 			"secret": true,
 			"ignore": true,
-			"raffleFile": "C:\\...\\games.txt"
+			"raffleFile": "C:\\...\\coupons.txt"
 		}, {
 			"reward": "Fireball",
 			"secret": false,

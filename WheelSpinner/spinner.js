@@ -289,7 +289,7 @@ function spinWheel(entries = contents.contents){
     //set animation properties:
     wheelEl.style.setProperty("--start-spin-at", 0);
     let stoppedAt = Math.random();
-    stoppedAt = stoppedAt * ((numOfSpins[1] - numOfSpins[0]) + numOfSpins[0]) * 360;
+    stoppedAt = (stoppedAt * (numOfSpins[1] - numOfSpins[0]) + numOfSpins[0]) * 360;
     wheelEl.style.setProperty("--end-spin-at", stoppedAt);
     let duration = Math.floor(Math.random() * (durationRange[1] - durationRange[0]) + durationRange[0]);
     wheelEl.style.setProperty("animation-duration", duration + "ms");
@@ -315,7 +315,6 @@ function spinWheel(entries = contents.contents){
  */
 function triggerSpin(webSocket, entries = contents.contents){
     //refreshWheel(entries);
-    setMidPic(parsePath(picture));
     let results = spinWheel(entries);
     setTimeout(winnerPicked, results.spinDuration, webSocket, results.pickedEntry.entry, results.index);
 }
@@ -416,6 +415,8 @@ function handleFileWatcher(event, fileName, webSocket = sbWs) {
         fPath = fileContents["folderPath"];
         if(fPath == null) {fPath = "";}
         folderPath = fPath;
+        
+        setMidPic(parsePath(picture));
 
         //Figure out the colours
         colors = generateGradient("444", "CCC", values.length); //Default colours, to be overwritten by the ones entered

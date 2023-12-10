@@ -168,7 +168,7 @@ return "rgba(" + parseInt(firstStep.slice(0,2), 16) + "," + parseInt(firstStep.s
  * @returns {Array} The array
  */
 function arrFromJsonData(data, property) {
-    let regex = new RegExp(property + "\\\[[\\\d+]\\\]", "g");
+    let regex = new RegExp(property + "\\\[[\\\d]+\\\]", "g");
     return Object.keys(data).filter(key => key.match(regex) == key).map((key) => {return data[key]});
 }
     //path parsing

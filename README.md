@@ -1,8 +1,8 @@
 # Giveaways with Streamer.Bot
 This extension adds giveaway functionality to your [Streamer.bot](https://streamer.bot/) setup.
-Version: 1.2.4
+Version: 1.3.0
 
-Written for Streamer.Bot version 0.2.1
+Written for Streamer.Bot version 0.2.2
 
 *Setup for Twitch only. No YouTube support currently
 
@@ -96,6 +96,7 @@ obsScene | The name of the scene containing the Wheel Winner and the Wheel Spinn
 duration | The duration of the giveaway, in milliseconds | "300000" | Can be passed as a first argument when starting a giveaway to overwrite it
 useWheel | Whether to use the wheel | "True" | Rolls invisibly if set to false
 removeWinnerFromPool | Whether to remove winner from entries pool | "True" | Useful for rerolls
+endGiveawayActionId | The id of the action to call when the giveaway ends | "9c528bf0-b2ec-4456-bb4a-30d6d58a5aec" (End Giveaway) | Use if you have a custom action, or an action to run before End Giveaway is called (and then call End Giveaway from it). Recommended to leave as is/ommit from your file.
 whisper | Whether to try whispering the winner | "False" | If false, and multiple reward options are given, choosing a reward will be handled in the public chat
 msgType | (For picking a reward) Whether to accept responses starting with the number choice, or containing exactly the number choice | "input0" | "input0" to accept any message starting with the number choice, "message" for accepting only answers that are EXACTLY the number choice
 sendWhisperFromBot | Whether to send whispers from the Bot account | "False" | If set to false, will send from the Broadcaster account
@@ -134,20 +135,21 @@ Property | Sub-property | Type | Explanation | Notes
 ------- | ------- | ------- | ------- | -------
 resultsFile || string | Path to a file to write the results into (Optional) | This file doesn't have to be an existing file. The path should be a full path. Streamer.Bot needs to be able to write to the file.
 wheelSettings || JSON object | Holds the settings for the wheel | Required if using a wheel. Optional otherwise.
-| folder | string | Path to the folder holding the icon, values, and spin files | Full path.
-| icon | string | The file to use as an icon in the middle of the wheel | Path relative to the folder.
-| values | string | This file will be used by the bot to send information | Path relative to the folder. This file doesn't have to be an existing file, and will get overwritten by the bot. Streamer.Bot needs to be able to write to the file.
-| spin | string | This file will be used by the bot to send information | Path relative to the folder. This file doesn't have to be an existing file, and will get overwritten by the bot. Streamer.Bot needs to be able to write to the file.
-| colorGradient | array of strings | Valid colours defined here will be used to create a gradient, or multiple gradients, to use as background colours for the wheel slices (Optional) | Supported colour formats include: #FFF, #FFFFFF, #FFFFFFFF, rgb(255, 255, 255), rgba(255, 255, 255, 1). Case-insensitive.
-| colors | array of strings | Valid colours defined here will be used to set colours of specific slices of the wheel, in order. You can use empty strings to skip slices | Takes priority over the gradient (covers the gradient where defined). Repeats itself if there are more slices than defined colours. Supported colour formats include: #FFF, #FFFFFF, #FFFFFFFF, rgb(255, 255, 255), rgba(255, 255, 255, 1). Case-insensitive.
+<span></span>| folder | string | Path to the folder holding the icon, values, and spin files | Full path.
+<span></span>| icon | string | The file to use as an icon in the middle of the wheel | Path relative to the folder.
+<span></span>| values | string | This file will be used by the bot to send information | Path relative to the folder. This file doesn't have to be an existing file, and will get overwritten by the bot. Streamer.Bot needs to be able to write to the file.
+<span></span>| spin | string | This file will be used by the bot to send information | Path relative to the folder. This file doesn't have to be an existing file, and will get overwritten by the bot. Streamer.Bot needs to be able to write to the file.
+<span></span>| colorGradient | array of strings | Valid colours defined here will be used to create a gradient, or multiple gradients, to use as background colours for the wheel slices (Optional) | Supported colour formats include: #FFF, #FFFFFF, #FFFFFFFF, rgb(255, 255, 255), rgba(255, 255, 255, 1). Case-insensitive.
+<span></span>| colors | array of strings | Valid colours defined here will be used to set colours of specific slices of the wheel, in order. You can use empty strings to skip slices | Takes priority over the gradient (covers the gradient where defined). Repeats itself if there are more slices than defined colours. Supported colour formats include: #FFF, #FFFFFF, #FFFFFFFF, rgb(255, 255, 255), rgba(255, 255, 255, 1). Case-insensitive.
 rewards || Array | The array of reward options | Define the rewards here. If only 1 reward is defined/available, it will be automatically picked. If there are multiple rewards available, the winner will be prompted to choose 1.
-| reward | string | The reward name |
-| rewardType | string | The type of reward | Valid options: "Exclusive", "Limited", "Limitless", "Repeated", "Game". <sup><a href="#raffletype-options">(explained bellow this table)<a></sup>. Alias: "raffleType"
-| secret | boolean | Whether to handle specifics for this reward over whispers only, or to allow publicly (Optional) | Default: false. Use this when giving away codes for example, so that they are not displayed in the public chat.
-| ignore | boolean | Whether to ignore this reward (Optional) | Default: false. Use this to easily toggle a reward's availability.
-| raffleFile | string | (For "Exclusive", "Repeated", and "Game" raffleTypes) The path to the actual rewards of the category | Will roll 1 reward from this file when this reward is chosen, and remove it from the file if the reward is of type Exclusive or Game
-| maximumAmount | int | (For "Limited" raffleTypes) The maximum amount of times this reward can be given out | **IMPORTANT** This requires a resultsFile to function
-| format | string | (For "Game" raffleTypes) The format in which the games are written down in your raffleFile, to allow publicly announcing the game won without revealing the code | Default: "GAME: CODE". Use GAME and CODE with separators that cannot be part of either (parts are allowed, but not as a whole). There must be some form of separation. Can also have things before and after, as long as they too are unique to the separator.
+<span></span>| reward | string | The reward name |
+<span></span>| rewardType | string | The type of reward | Valid options: "Exclusive", "Limited", "Limitless", "Repeated", "Game". <sup><a href="#raffletype-options">(explained bellow this table)<a></sup>. Alias: "raffleType"
+<span></span>| message | string | Overrides the default reward message (Optional) | `[REWARD]` and `[SPECIFIC]` will be replaced with the reward's name and the specific reward rolled respectively
+<span></span>| secret | boolean | Whether to handle specifics for this reward over whispers only, or to allow publicly (Optional) | Default: false. Use this when giving away codes for example, so that they are not displayed in the public chat.
+<span></span>| ignore | boolean | Whether to ignore this reward (Optional) | Default: false. Use this to easily toggle a reward's availability.
+<span></span>| raffleFile | string | (For "Exclusive", "Repeated", and "Game" raffleTypes) The path to the actual rewards of the category | Will roll 1 reward from this file when this reward is chosen, and remove it from the file if the reward is of type Exclusive or Game
+<span></span>| maximumAmount | int | (For "Limited" raffleTypes) The maximum amount of times this reward can be given out | **IMPORTANT** This requires a resultsFile to function
+<span></span>| format | string | (For "Game" raffleTypes) The format in which the games are written down in your raffleFile, to allow publicly announcing the game won without revealing the code | Default: "GAME: CODE". Use GAME and CODE with separators that cannot be part of either (parts are allowed, but not as a whole). There must be some form of separation. Can also have things before and after, as long as they too are unique to the separator.
 
 ### raffleType options
 - Exclusive: each reward from the associated raffleFile can be given once. Becomes unavailable if the raffleFile is empty.
@@ -179,7 +181,7 @@ Command Name | Trigger | Explanation | Aliases | Permissions | Notes
 ------- | ------- | ------- | ------- | ------- | -------
 Cancel Giveaway | `!cancelgiveaway` | Cancels a running giveaway | `!cga` | Moderators | Make sure the Giveaway action queues are cleared before starting a new giveaway, or you may get double prints and unexpected behaviour.
 Check Giveaway Time Left | `!gtime` | Prints how long is left to join the giveaway | `!giveawaytime`, `!cgt`, `!checkGiveawayTime` | Anyone | 
-Join Giveaway | `!giveaway` | Joins the running giveaway | | Anyone | 
+Join Giveaway | `!giveaway` | Joins the running giveaway | | Anyone | Is in its own commands category (`Giveaway Join`), separate to the others. The first alias listed will be used in prints prompting users to join the giveaway.
 Manual Giveaway Winner | `!pickWinner` | Allows picking a winner manually | `!pgw` | Moderators | Pass the winning user as a first argument when using this command (e.g. `!pgw @SuperTheUnderDog`).
 Reroll Giveaway Winner | `!rerollGiveaway` | Rerolls the giveaway | `!rga` | Moderators | Uses the same list of entrants from the last-run giveaway (minus the winner from last time, if the `removeWinnerFromPool` setting is true)
 Start Giveaway | `!startGiveaway` | Starts a giveaway | `!sga` | Moderators | Can accept a duration as its first argument, and a settings file index as its second argument.

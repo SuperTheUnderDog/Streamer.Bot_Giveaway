@@ -11,28 +11,33 @@
 	"rewards": [
 		{
 			"reward": "Discount code",
+			"message": "Your [REWARD] is [SPECIFIC]",
 			"raffleType": "Exclusive",
 			"secret": true,
 			"ignore": true,
 			"raffleFile": "C:\\...\\coupons.txt"
 		}, {
 			"reward": "Fireball",
+			"message": "You won a [REWARD]!",
 			"secret": false,
 			"raffleType": "Limited",
 			"maximumAmount": 8
 		}, {
 			"reward": "Free Spin",
+			"message": "You won a [REWARD]!",
 			"ignore": false,
 			"secret": false,
 			"rewardType": "Limitless"
 		}, {
 			"reward": "Orb",
+			"message": "Your [REWARD] is [SPECIFIC]!",
 			"ignore": false,
 			"raffleType": "Repeated",
 			"raffleFile": "C:\\...\\orbs.txt"
 		}, {
 			"reward": "Game",
 			"raffleType": "Game",
+			"message": " won a [REWARD]!",
 			"secret": true,
 			"format": "GAME - CODE",
 			"raffleFile": "C:\\...\\gamesFormatted.txt"

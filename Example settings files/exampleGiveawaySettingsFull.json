@@ -13,6 +13,7 @@
 	"duration": "300000",
 	"useWheel": "True",
 	"removeWinnerFromPool": "true",
+	"endGiveawayActionId" : "9c528bf0-b2ec-4456-bb4a-30d6d58a5aec",
 	"whisper": "false",
 	"msgType": "input0",
 	"sendWhisperFromBot": "False",
